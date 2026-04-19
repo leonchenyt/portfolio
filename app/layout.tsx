@@ -13,7 +13,7 @@ const cinzel = Cinzel({
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -45,7 +45,7 @@ export default function RootLayout({
       lang="en"
       className={`${cinzel.variable} ${outfit.variable} ${dmSans.variable} ${calamity.variable} h-full`}
     >
-      <body className="min-h-full bg-[#1d1d1d] text-[#e8e8e8] antialiased">
+      <body className="min-h-full bg-[#1c1c1c] text-[#e0e0e0] antialiased">
         {children}
       </body>
     </html>
