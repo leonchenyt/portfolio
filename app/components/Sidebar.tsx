@@ -21,10 +21,8 @@ export default function Sidebar() {
       const el = document.getElementById(id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(id);
-        },
-        { threshold: 0.4 }
+        ([entry]) => { if (entry.isIntersecting) setActive(id); },
+        { threshold: 0.35 }
       );
       obs.observe(el);
       observers.push(obs);
@@ -35,15 +33,17 @@ export default function Sidebar() {
 
   const handleNav = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <nav className="hidden md:flex fixed left-0 top-0 h-full w-14 flex-col items-center justify-center z-50 border-r border-white/5">
-        <div className="flex flex-col items-center gap-10">
+      {/* ── Desktop sidebar ── */}
+      <nav
+        className="hidden md:flex fixed left-0 top-0 h-full w-20 flex-col items-center justify-center z-50 border-r border-white/5"
+        aria-label="Site navigation"
+      >
+        <div className="flex flex-col items-start gap-8 px-3">
           {NAV_ITEMS.map(({ label, href }) => {
             const id = href.replace("#", "");
             const isActive = active === id;
@@ -51,38 +51,57 @@ export default function Sidebar() {
               <button
                 key={label}
                 onClick={() => handleNav(href)}
-                className="group relative flex items-center justify-center"
-                aria-label={label}
+                className="group relative flex items-center gap-2 focus-visible:outline-none"
+                aria-label={`Navigate to ${label}`}
               >
+                {/* Active left-border indicator */}
                 <span
-                  className="writing-vertical text-xs tracking-[0.3em] uppercase transition-all duration-300"
+                  className="block w-0.5 h-4 rounded-full"
                   style={{
-                    writingMode: "vertical-rl",
-                    textOrientation: "mixed",
-                    transform: "rotate(180deg)",
-                    color: isActive ? "#C8A96E" : "#555",
-                    fontFamily: "var(--font-outfit)",
-                    letterSpacing: "0.25em",
+                    backgroundColor: isActive ? "#C8A96E" : "transparent",
+                    opacity: isActive ? 1 : 0,
+                    transition: "opacity 0.3s ease",
+                  }}
+                />
+                <span
+                  className="text-sm select-none"
+                  style={{
+                    fontFamily: "var(--font-calamity)",
+                    color: isActive ? "#C8A96E" : "#4a4a4a",
+                    transition: "color 0.3s ease",
+                    letterSpacing: "0.05em",
                   }}
                 >
                   {label}
                 </span>
-                {isActive && (
-                  <span className="absolute left-full ml-2 w-1 h-1 rounded-full bg-[#C8A96E]" />
-                )}
+                {/* Hover underline */}
+                <span
+                  className="absolute -bottom-0.5 left-4 h-px bg-[#C8A96E]"
+                  style={{
+                    width: isActive ? "100%" : "0%",
+                    transition: "width 0.3s ease",
+                  }}
+                />
               </button>
             );
           })}
         </div>
 
-        {/* Bottom decoration */}
-        <div className="absolute bottom-8 flex flex-col items-center gap-1">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#C8A96E]/30" />
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+          <div
+            className="w-px h-16"
+            style={{
+              background: "linear-gradient(to bottom, transparent, rgba(200,169,110,0.25))",
+            }}
+          />
         </div>
       </nav>
 
-      {/* Mobile top bar */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#1d1d1d]/90 backdrop-blur-sm border-b border-white/5">
+      {/* ── Mobile top bar ── */}
+      <nav
+        className="md:hidden fixed top-0 left-0 right-0 z-50 border-b border-white/5"
+        style={{ backgroundColor: "rgba(29,29,29,0.92)", backdropFilter: "blur(8px)" }}
+      >
         <div className="flex items-center justify-between px-6 h-14">
           <span
             className="text-[#C8A96E] text-sm tracking-widest uppercase"
@@ -92,29 +111,45 @@ export default function Sidebar() {
           </span>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col gap-1.5 p-2"
-            aria-label="Toggle menu"
+            className="flex flex-col gap-1.5 p-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A96E]/40"
+            aria-label="Toggle navigation menu"
           >
             <span
-              className={`block w-5 h-px bg-[#888] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`}
+              className="block w-5 h-px bg-[#888]"
+              style={{
+                transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "none",
+                transition: "transform 0.25s ease",
+              }}
             />
             <span
-              className={`block w-5 h-px bg-[#888] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+              className="block w-5 h-px bg-[#888]"
+              style={{
+                opacity: menuOpen ? 0 : 1,
+                transition: "opacity 0.25s ease",
+              }}
             />
             <span
-              className={`block w-5 h-px bg-[#888] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
+              className="block w-5 h-px bg-[#888]"
+              style={{
+                transform: menuOpen ? "rotate(-45deg) translate(2px, -2px)" : "none",
+                transition: "transform 0.25s ease",
+              }}
             />
           </button>
         </div>
 
         {menuOpen && (
-          <div className="px-6 pb-6 flex flex-col gap-4">
+          <div className="px-6 pb-6 flex flex-col gap-5">
             {NAV_ITEMS.map(({ label, href }) => (
               <button
                 key={label}
                 onClick={() => handleNav(href)}
-                className="text-left text-sm tracking-widest uppercase text-[#888] hover:text-[#C8A96E] transition-colors"
-                style={{ fontFamily: "var(--font-outfit)" }}
+                className="text-left text-sm text-[#888] focus-visible:outline-none focus-visible:text-[#C8A96E]"
+                style={{
+                  fontFamily: "var(--font-calamity)",
+                  letterSpacing: "0.06em",
+                  // hover handled via JS active state on mobile
+                }}
               >
                 {label}
               </button>

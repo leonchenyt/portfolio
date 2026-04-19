@@ -1,5 +1,6 @@
 import Sidebar from "./components/Sidebar";
 import ZeldaCircle from "./components/ZeldaCircle";
+import ContactForm from "./components/ContactForm";
 
 const SKILLS = [
   "TypeScript", "React", "Next.js", "Node.js",
@@ -36,74 +37,92 @@ export default function Home() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      {/* Main content — offset for sidebar */}
-      <main className="flex-1 md:pl-14">
+      {/* Main content — offset for desktop sidebar */}
+      <main className="flex-1 md:pl-20">
 
-        {/* ── Hero ─────────────────────────────────────────────── */}
+        {/* ── Hero ─────────────────────────────────────────── */}
         <section
           id="hero"
-          className="relative flex min-h-screen items-center overflow-hidden px-10 md:px-20 lg:px-32"
+          className="relative flex min-h-screen items-center overflow-hidden"
         >
-          {/* Zelda watermark — centered absolutely */}
+          {/* Zelda watermark — absolutely centered */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div className="zelda-outer">
               <ZeldaCircle />
             </div>
           </div>
 
-          {/* Hero text */}
-          <div className="relative z-10 max-w-2xl">
+          {/* Hero content — centered column */}
+          <div className="relative z-10 w-full max-w-4xl mx-auto px-10 md:px-16 lg:px-24">
             <p
-              className="mb-3 text-xs tracking-[0.4em] uppercase text-[#C8A96E]"
+              className="mb-4 text-xs tracking-[0.45em] uppercase text-[#C8A96E]"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
               Welcome
             </p>
+
             <h1
-              className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight"
-              style={{ fontFamily: "var(--font-cinzel)" }}
+              className="leading-[0.95] tracking-[-0.03em]"
+              style={{ fontFamily: "var(--font-cinzel)", fontSize: "clamp(3.5rem, 10vw, 7rem)" }}
             >
               Hi, I&apos;m
               <br />
-              <span className="text-[#e63946]">Leon Chen</span>
+              <span style={{ color: "#e63946" }}>Leon Chen</span>
             </h1>
+
             <p
-              className="mt-4 text-3xl md:text-5xl font-light text-[#e8e8e8]/70 tracking-wide"
-              style={{ fontFamily: "var(--font-outfit)" }}
+              className="mt-5 font-light text-[#e8e8e8]/65 tracking-wide"
+              style={{
+                fontFamily: "var(--font-outfit)",
+                fontSize: "clamp(1.6rem, 4vw, 2.8rem)",
+              }}
             >
               web developer
             </p>
+
             <p
-              className="mt-8 max-w-md text-sm leading-7 text-[#888]"
+              className="mt-8 max-w-lg text-[15px] leading-[1.85] text-[#888]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               I build clean, thoughtful interfaces and robust back-ends.
               Currently open to new opportunities.
             </p>
 
-            <div className="mt-10 flex items-center gap-6">
+            <div className="mt-10 flex items-center gap-8">
               <a
                 href="#portfolio"
-                className="text-xs tracking-[0.3em] uppercase text-[#e8e8e8] border border-[#e8e8e8]/20 px-6 py-3 hover:border-[#C8A96E]/60 hover:text-[#C8A96E] transition-all duration-300"
-                style={{ fontFamily: "var(--font-outfit)" }}
+                className="inline-block text-xs tracking-[0.3em] uppercase text-[#e8e8e8] border border-[#e8e8e8]/20 px-7 py-3.5
+                           hover:border-[#C8A96E]/60 hover:text-[#C8A96E]
+                           focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A96E]/50
+                           active:opacity-70"
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  transition: "color 0.25s ease, border-color 0.25s ease",
+                }}
               >
                 View Work
               </a>
               <a
                 href="#contact"
-                className="text-xs tracking-[0.3em] uppercase text-[#888] hover:text-[#C8A96E] transition-colors duration-300"
-                style={{ fontFamily: "var(--font-outfit)" }}
+                className="text-xs tracking-[0.3em] uppercase text-[#666]
+                           hover:text-[#C8A96E]
+                           focus-visible:outline-none focus-visible:text-[#C8A96E]
+                           active:opacity-70"
+                style={{
+                  fontFamily: "var(--font-outfit)",
+                  transition: "color 0.25s ease",
+                }}
               >
                 Get in Touch →
               </a>
             </div>
           </div>
 
-          {/* Bottom line decoration */}
-          <div className="absolute bottom-12 left-10 md:left-20 lg:left-32 flex items-center gap-4">
-            <div className="h-px w-12 bg-[#C8A96E]/30" />
+          {/* Bottom scroll hint */}
+          <div className="absolute bottom-10 left-10 md:left-32 flex items-center gap-4">
+            <div className="h-px w-10 bg-[#C8A96E]/25" />
             <span
-              className="text-[10px] tracking-[0.4em] uppercase text-[#555]"
+              className="text-[10px] tracking-[0.4em] uppercase text-[#444]"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
               Scroll
@@ -111,18 +130,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── About ────────────────────────────────────────────── */}
+        {/* ── About ────────────────────────────────────────── */}
         <section
           id="about"
-          className="min-h-screen flex items-center px-10 md:px-20 lg:px-32 py-24"
+          className="min-h-screen flex items-center py-32 px-10 md:px-16 lg:px-24"
         >
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-4xl mx-auto">
             <SectionLabel text="About Me" />
 
-            <div className="mt-12 grid md:grid-cols-2 gap-16">
+            <div className="mt-14 grid md:grid-cols-2 gap-16 lg:gap-24">
+              {/* Bio */}
               <div>
                 <p
-                  className="text-[#aaa] leading-8 text-sm mb-6"
+                  className="text-[15px] leading-[1.85] text-[#999] mb-6"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   I&apos;m a full-stack developer with a passion for building
@@ -131,7 +151,7 @@ export default function Home() {
                   thoughtful architecture, and interfaces that feel effortless.
                 </p>
                 <p
-                  className="text-[#aaa] leading-8 text-sm"
+                  className="text-[15px] leading-[1.85] text-[#999]"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   When I&apos;m not writing code, I&apos;m exploring design systems,
@@ -139,21 +159,21 @@ export default function Home() {
                   with generative art.
                 </p>
 
-                <div className="mt-10 flex flex-col gap-3">
+                <div className="mt-10 flex flex-col gap-4">
                   {[
                     ["Based in", "Toronto, Canada"],
                     ["Available", "Open to roles"],
                     ["Languages", "EN / ZH"],
                   ].map(([label, value]) => (
-                    <div key={label} className="flex items-center gap-4">
+                    <div key={label} className="flex items-center gap-5">
                       <span
-                        className="text-[10px] tracking-[0.3em] uppercase text-[#555] w-20"
+                        className="text-[10px] tracking-[0.35em] uppercase text-[#444] w-24 shrink-0"
                         style={{ fontFamily: "var(--font-outfit)" }}
                       >
                         {label}
                       </span>
                       <span
-                        className="text-xs text-[#888]"
+                        className="text-sm text-[#777]"
                         style={{ fontFamily: "var(--font-dm-sans)" }}
                       >
                         {value}
@@ -163,23 +183,30 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Skills */}
               <div>
                 <p
-                  className="text-[10px] tracking-[0.4em] uppercase text-[#555] mb-6"
+                  className="text-[10px] tracking-[0.4em] uppercase text-[#444] mb-7"
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   Technologies
                 </p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-x-6">
                   {SKILLS.map((skill) => (
                     <div
                       key={skill}
-                      className="flex items-center gap-3 py-2 border-b border-[#2e2e2e] group"
+                      className="flex items-center gap-3 py-2.5 border-b border-[#2a2a2a] group"
                     >
-                      <span className="w-1 h-1 rounded-full bg-[#C8A96E]/50 group-hover:bg-[#C8A96E] transition-colors" />
                       <span
-                        className="text-xs text-[#777] group-hover:text-[#aaa] transition-colors"
-                        style={{ fontFamily: "var(--font-dm-sans)" }}
+                        className="w-1 h-1 rounded-full bg-[#C8A96E]/40 shrink-0"
+                        style={{ transition: "background-color 0.2s ease" }}
+                      />
+                      <span
+                        className="text-[13px] text-[#666]"
+                        style={{
+                          fontFamily: "var(--font-dm-sans)",
+                          transition: "color 0.2s ease",
+                        }}
                       >
                         {skill}
                       </span>
@@ -191,50 +218,70 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Portfolio ─────────────────────────────────────────── */}
+        {/* ── Portfolio ──────────────────────────────────────── */}
         <section
           id="portfolio"
-          className="min-h-screen px-10 md:px-20 lg:px-32 py-24"
+          className="min-h-screen py-32 px-10 md:px-16 lg:px-24"
         >
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mx-auto">
             <SectionLabel text="Portfolio" />
 
-            <div className="mt-12 flex flex-col gap-12">
+            <div className="mt-14 flex flex-col gap-16">
               {PROJECTS.map((project, i) => (
                 <article
                   key={project.title}
-                  className="group grid md:grid-cols-[1fr_2fr] gap-8 border-b border-[#2e2e2e] pb-12"
+                  className="group grid md:grid-cols-[5fr_7fr] gap-10 border-b border-[#252525] pb-16"
                 >
-                  {/* Project image placeholder */}
-                  <div className="relative aspect-[4/3] bg-[#232323] border border-[#2e2e2e] overflow-hidden flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#C8A96E]/5 to-transparent" />
+                  {/* Image placeholder */}
+                  <div className="relative aspect-[4/3] bg-[#222] border border-[#2a2a2a] overflow-hidden flex items-center justify-center">
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "radial-gradient(ellipse at 30% 30%, rgba(200,169,110,0.04) 0%, transparent 70%)",
+                      }}
+                    />
                     <span
-                      className="text-[#333] text-4xl font-black"
-                      style={{ fontFamily: "var(--font-cinzel)" }}
+                      className="text-[#2e2e2e] font-black"
+                      style={{
+                        fontFamily: "var(--font-cinzel)",
+                        fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                        letterSpacing: "-0.02em",
+                      }}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div className="absolute bottom-3 right-3 w-6 h-px bg-[#C8A96E]/30 group-hover:w-10 transition-all duration-500" />
+                    <div
+                      className="absolute bottom-3 right-3 h-px bg-[#C8A96E]/25"
+                      style={{
+                        width: "1.5rem",
+                        transition: "width 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+                      }}
+                    />
                   </div>
 
-                  {/* Project info */}
+                  {/* Info */}
                   <div className="flex flex-col justify-center">
                     <div className="flex items-baseline justify-between mb-3">
                       <h3
-                        className="text-lg font-semibold text-[#e8e8e8] group-hover:text-[#C8A96E] transition-colors duration-300"
-                        style={{ fontFamily: "var(--font-outfit)" }}
+                        className="text-xl font-semibold text-[#e0e0e0]"
+                        style={{
+                          fontFamily: "var(--font-outfit)",
+                          transition: "color 0.2s ease",
+                          letterSpacing: "-0.01em",
+                        }}
                       >
                         {project.title}
                       </h3>
                       <span
-                        className="text-[10px] tracking-widest text-[#555]"
+                        className="text-[10px] tracking-widest text-[#444]"
                         style={{ fontFamily: "var(--font-outfit)" }}
                       >
                         {project.year}
                       </span>
                     </div>
                     <p
-                      className="text-sm text-[#777] leading-7 mb-5"
+                      className="text-[14px] text-[#6a6a6a] leading-[1.85] mb-6"
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {project.description}
@@ -243,7 +290,7 @@ export default function Home() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] tracking-widest uppercase text-[#555] border border-[#2e2e2e] px-3 py-1"
+                          className="text-[10px] tracking-widest uppercase text-[#4a4a4a] border border-[#272727] px-3 py-1.5"
                           style={{ fontFamily: "var(--font-outfit)" }}
                         >
                           {tag}
@@ -257,59 +304,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Contact ──────────────────────────────────────────── */}
+        {/* ── Contact ──────────────────────────────────────── */}
         <section
           id="contact"
-          className="min-h-screen flex items-center px-10 md:px-20 lg:px-32 py-24"
+          className="min-h-screen flex items-center py-32 px-10 md:px-16 lg:px-24"
         >
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-2xl mx-auto">
             <SectionLabel text="Contact Me" />
 
             <p
-              className="mt-6 text-sm text-[#777] leading-7 mb-10"
+              className="mt-6 text-[15px] text-[#666] leading-[1.85] mb-12"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               If you are interested in working together or just want to say hi,
               feel free to reach out. I&apos;ll get back to you within a day or two.
             </p>
 
-            <form className="flex flex-col gap-6">
-              <FormField label="Name" type="text" placeholder="Your name" />
-              <FormField label="Email" type="email" placeholder="your@email.com" />
-              <div className="flex flex-col gap-2">
-                <label
-                  className="text-[10px] tracking-[0.3em] uppercase text-[#555]"
-                  style={{ fontFamily: "var(--font-outfit)" }}
-                >
-                  Message
-                </label>
-                <textarea
-                  rows={5}
-                  placeholder="What's on your mind?"
-                  className="bg-transparent border border-[#2e2e2e] text-[#aaa] text-sm px-4 py-3 resize-none placeholder:text-[#444] focus:outline-none focus:border-[#C8A96E]/40 transition-colors"
-                  style={{ fontFamily: "var(--font-dm-sans)" }}
-                />
-              </div>
+            <ContactForm />
 
-              <button
-                type="submit"
-                className="self-start text-xs tracking-[0.3em] uppercase text-[#e8e8e8] border border-[#e8e8e8]/20 px-8 py-3 hover:border-[#C8A96E]/60 hover:text-[#C8A96E] transition-all duration-300 mt-2"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
-                Send Message
-              </button>
-            </form>
-
-            {/* Footer */}
-            <div className="mt-20 flex items-center gap-4">
-              <div className="h-px flex-1 bg-[#2e2e2e]" />
+            {/* Footer rule */}
+            <div className="mt-24 flex items-center gap-5">
+              <div className="h-px flex-1 bg-[#252525]" />
               <span
-                className="text-[10px] tracking-widest uppercase text-[#444]"
+                className="text-[10px] tracking-[0.35em] uppercase text-[#383838]"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
                 Leon Chen · {new Date().getFullYear()}
               </span>
-              <div className="h-px flex-1 bg-[#2e2e2e]" />
+              <div className="h-px flex-1 bg-[#252525]" />
             </div>
           </div>
         </section>
@@ -318,13 +340,18 @@ export default function Home() {
   );
 }
 
+/* ── Shared sub-components ── */
+
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-5">
-      <div className="h-px w-8 bg-[#C8A96E]/40" />
+      <div className="h-px w-10 bg-[#C8A96E]/35" />
       <h2
-        className="text-2xl md:text-3xl font-light tracking-wide text-[#e8e8e8]"
-        style={{ fontFamily: "var(--font-cinzel)" }}
+        className="font-light tracking-[-0.02em] text-[#e0e0e0]"
+        style={{
+          fontFamily: "var(--font-cinzel)",
+          fontSize: "clamp(1.6rem, 4vw, 2.4rem)",
+        }}
       >
         {text}
       </h2>
@@ -332,29 +359,3 @@ function SectionLabel({ text }: { text: string }) {
   );
 }
 
-function FormField({
-  label,
-  type,
-  placeholder,
-}: {
-  label: string;
-  type: string;
-  placeholder: string;
-}) {
-  return (
-    <div className="flex flex-col gap-2">
-      <label
-        className="text-[10px] tracking-[0.3em] uppercase text-[#555]"
-        style={{ fontFamily: "var(--font-outfit)" }}
-      >
-        {label}
-      </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="bg-transparent border-b border-[#2e2e2e] text-[#aaa] text-sm px-1 py-2 placeholder:text-[#444] focus:outline-none focus:border-[#C8A96E]/40 transition-colors"
-        style={{ fontFamily: "var(--font-dm-sans)" }}
-      />
-    </div>
-  );
-}
