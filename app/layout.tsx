@@ -30,8 +30,14 @@ const calamity = localFont({
   display: "swap",
 });
 
+const kaisotai = localFont({
+  src: "../fonts/Kaisotai-Next-UP-B.ttf",
+  variable: "--font-kaisotai",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Leon Chen | Portfolio",
+  title: "Leon Chen | Projects",
   description: "Full Stack Developer — crafting thoughtful digital experiences.",
 };
 
@@ -43,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cinzel.variable} ${outfit.variable} ${dmSans.variable} ${calamity.variable} h-full`}
+      className={`${cinzel.variable} ${outfit.variable} ${dmSans.variable} ${calamity.variable} ${kaisotai.variable} h-full`}
     >
       <body className="min-h-full bg-[#1c1c1c] text-[#e0e0e0] antialiased">
         {children}
