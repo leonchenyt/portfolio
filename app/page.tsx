@@ -381,7 +381,7 @@ export default function Home() {
 
             {/* EDIT: update href with your email address */}
             <a
-              href="mailto:leonchenyt@gmail.com"
+              href="mailto:leonchen.yenting@gmail.com"
               className="inline-block px-8 py-3 border border-[#B87333] text-[#B87333] text-sm font-semibold tracking-widest uppercase
                          hover:bg-[#B87333] hover:text-[#1c1c1c]
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B87333]/50
